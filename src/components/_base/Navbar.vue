@@ -1,5 +1,5 @@
 <template>
-<nav class="row navbar navbar-expand-lg navbar-white bg-white no-gutters shadow-sm sticky-top">
+<nav class="row navbar navbar-expand-lg navbar-white bg-white no-gutters sticky-top">
     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
         <ul class="nav mt-3 mb-3">
             <li class="mx-auto nav-item "><a class="nav-link text-dark active" href="#"><i class="fas fa-bars"></i></a></li>

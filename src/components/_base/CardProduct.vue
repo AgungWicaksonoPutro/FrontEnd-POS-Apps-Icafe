@@ -1,10 +1,12 @@
 <template>
     <div class="card bg-transparent">
-        <img src="https://via.placeholder.com/150" class="card-img-top" alt="blackforest">
-        <div class="card-body d-flex align-items-start flex-column">
-            <p class="card-text">Coffe Latte</p>
-            <h6>Rp. 15.000</h6>
-        </div>
+        <a class="nav-link" href="#">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="blackforest">
+            <div class="card-body d-flex align-items-start flex-column">
+                <p class="card-text">Coffe Latte</p>
+                <h6>Rp. 15.000</h6>
+            </div>
+        </a>
     </div>
 </template>
 
@@ -20,18 +22,20 @@ export default {
     flex-basis: 30%;
     margin: 10px;
 }
-.card .card-body{
+
+.card-body{
+    color: black;
     padding: 3px;
 }
 
-.card .card-text{
+.card-text{
     margin: 5px;
     font-size: 14px;
     letter-spacing: 2px;
 }
 
-.card h6{
-    font-size: 18px;
+h6{
+    font-size: 16px;
     font-weight: bold;
     padding: 5px;
 }
@@ -42,13 +46,13 @@ export default {
     }
   }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 690px) {
     .card {
         flex-basis: 100%;
     }
   }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 480px) {
     .card {
         flex-basis: 100%;
     }

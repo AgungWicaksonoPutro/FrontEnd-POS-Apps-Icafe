@@ -47,6 +47,10 @@ font-style: normal;
 font-weight: normal;
 src: local('Airbnb Cereal App Black'), url('../src/assets/font/AirbnbCerealBlack.woff') format('woff');
 }
+* {
+  margin: 0;
+  padding: 0;
+}
 
 #app {
   font-family: 'Airbnb Cereal App Light', Helvetica, Arial, sans-serif;
