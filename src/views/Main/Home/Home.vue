@@ -13,15 +13,11 @@
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 bg-white right">
             <div class="list-cart">
                 <AddItems/>
-                <AddItems/>
-                <AddItems/>
-                <AddItems/>
-                <AddItems/>
             </div>
             <div class="execute">
                 <SumTransaction/>
-                <div class="row summary-transaction no-gutters">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">1</div>
+                <div class="row info-tax no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-3"><p>*Belum termasuk ppn</p></div>
                 </div>
                 <div class="row button-execute no-gutters">
                     <ButtonCheckout/>
@@ -88,6 +84,10 @@ export default {
 }
 .execute{
     height: 30%;
+}
+.info-tax {
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 .center::-webkit-scrollbar {
   width: 0.7em;

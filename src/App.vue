@@ -53,10 +53,18 @@ src: local('Airbnb Cereal App Black'), url('../src/assets/font/AirbnbCerealBlack
 }
 
 #app {
-  font-family: 'Airbnb Cereal App Light', Helvetica, Arial, sans-serif;
+  font-family: 'Airbnb Cereal App Book', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+body::-webkit-scrollbar {
+  width: 0.7em;
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
 }
 </style>

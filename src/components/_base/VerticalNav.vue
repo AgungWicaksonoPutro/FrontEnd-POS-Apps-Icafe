@@ -1,7 +1,7 @@
 <template>
     <nav class="nav flex-column">
-        <a class="nav-link active mx-auto mb-3 mt-3 fork" href="#"></a>
-        <a class="nav-link mx-auto mb-3 mt-2  clipboard" href="#"></a>
+        <router-link :to="{name: 'Home'}" class="nav-link active mx-auto mb-3 mt-3 fork"></router-link>
+        <router-link :to="{name: 'History'}" class="nav-link mx-auto mb-3 mt-2  clipboard"></router-link>
         <a class="nav-link mx-auto mb-3 mt-2  add" href="#"></a>
     </nav>
 </template>

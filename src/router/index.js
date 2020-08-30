@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Main/Home/Home.vue'
 import Main from '../views/Main/Index.vue'
+import History from '../views/Main/History/History.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
         path: 'Home',
         name: 'Home',
         component: Home
+      },
+      {
+        path: 'History',
+        name: 'History',
+        component: History
       }
     ]
   }

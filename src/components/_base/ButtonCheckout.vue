@@ -13,11 +13,13 @@ export default {
 <style scoped>
 .btn-primary{
     width: 90%;
-    margin: 10px;
+    margin: 5px;
     border-radius: 0;
     background: #57CAD5;
-    font-size: 25px;
+    font-size: 16px;
+    letter-spacing: 1px;
     line-height: 33px;
+    font-weight: bold;
     border-color: transparent;
 }
 </style>
