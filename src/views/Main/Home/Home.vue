@@ -7,7 +7,9 @@
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-10 bg-grey center">
             <div class="row card-row no-gutters">
-                <CardProduct/>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12" v-for="item in allProducts" :key="item.id">
+                    <CardProduct :data="item"/>
+                </div>
             </div>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 bg-white right">
@@ -37,6 +39,7 @@ import AddItems from '../../../components/_base/AddItems'
 import SumTransaction from '../../../components/_base/SumTransaction'
 import ButtonCheckout from '../../../components/_base/ButtonCheckout'
 import ButtonCancel from '../../../components/_base/ButtonCancel'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -47,6 +50,15 @@ export default {
     SumTransaction,
     ButtonCheckout,
     ButtonCancel
+  },
+  methods: {
+    ...mapActions(['getAllProducts'])
+  },
+  computed: {
+    ...mapGetters(['allProducts'])
+  },
+  mounted () {
+    this.getAllProducts()
   }
 }
 </script>
@@ -94,7 +106,7 @@ export default {
   background: transparent;
 }
 .center::-webkit-scrollbar-thumb {
-  background: rgba(250, 250, 250, 0.726);
+  background: rgba(250, 250, 250, 0.308);
   border-radius: 10px;
 }
 .list-cart::-webkit-scrollbar {
@@ -102,7 +114,7 @@ export default {
   background: transparent;
 }
 .list-cart::-webkit-scrollbar-thumb {
-  background: rgba(250, 250, 250, 0.726);
+  background: rgba(250, 250, 250, 0.233);
   border-radius: 10px;
 }
 </style>

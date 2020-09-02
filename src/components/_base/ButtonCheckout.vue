@@ -12,8 +12,8 @@ export default {
 
 <style scoped>
 .btn-primary{
-    width: 90%;
-    margin: 5px;
+    width: 100%;
+    margin: 10px;
     border-radius: 0;
     background: #57CAD5;
     font-size: 16px;

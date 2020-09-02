@@ -6,9 +6,9 @@
                 <div class="radial3"></div>
             </div>
             <div class="body-card">
-                <div class="col title-report d-flex justify-content-start">Today’s Income</div>
-                <div class="col finance-report d-flex justify-content-start">Rp. 1.000.000 </div>
-                <div class="col period d-flex justify-content-start">+2% Yesterday</div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 title-report d-flex justify-content-start">Today’s Income</div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 finance-report d-flex justify-content-start">Rp. 1.000.000 </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 period d-flex justify-content-start">+2% Yesterday</div>
             </div>
         </div>
 </template>

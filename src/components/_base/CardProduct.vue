@@ -1,10 +1,10 @@
 <template>
     <div class="card bg-transparent">
         <a class="nav-link" href="#">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="blackforest">
+            <img :src="data.imageProduct" class="card-img-top" alt="blackforest">
             <div class="card-body d-flex align-items-start flex-column">
-                <p class="card-text">Coffe Latte</p>
-                <h6>Rp. 15.000</h6>
+                <p class="card-text">{{data.nameProduct}}</p>
+                <h6>{{data.priceProduct}}</h6>
             </div>
         </a>
     </div>
@@ -12,7 +12,8 @@
 
 <script>
 export default {
-  name: 'CardProduct'
+  name: 'CardProduct',
+  props: ['data']
 }
 </script>
 
