@@ -19,7 +19,7 @@
             <div class="execute">
                 <SumTransaction/>
                 <div class="row info-tax no-gutters">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-3"><p>*Belum termasuk ppn</p></div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-3 text-left"><p>*Belum termasuk ppn</p></div>
                 </div>
                 <div class="row button-execute no-gutters">
                     <ButtonCheckout/>

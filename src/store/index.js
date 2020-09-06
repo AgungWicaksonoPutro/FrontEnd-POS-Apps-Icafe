@@ -45,11 +45,32 @@ export default new Vuex.Store({
         return Promise.reject(error)
       })
     },
+    insertProduct (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:3400/api/v1/icafe/product', payload)
+          .then((res) => {
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    register (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:3400/api/v1/icafe/users/register', payload)
+          .then((res) => {
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
     login (context, payload) {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3400/api/v1/icafe/users/login', payload)
           .then((res) => {
-            console.log(res)
             context.commit('setUser', res.data.result)
             localStorage.setItem('token', res.data.result.token)
             context.dispatch('interceptorRequest')
