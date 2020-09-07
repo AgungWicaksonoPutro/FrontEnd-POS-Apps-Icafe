@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     products: [],
     user: {},
-    token: localStorage.getItem('token') || null
+    token: localStorage.getItem('token') || null,
+    carts: []
   },
   mutations: {
     setAllProducts (state, payload) {
@@ -21,15 +22,33 @@ export default new Vuex.Store({
     },
     setToken (state, payload) {
       state.token = payload
+    },
+    setPaginations (state, payload) {
+      state.paginations = payload
+    },
+    addCart (state, payload) {
+      const isCart = state.carts.find((item) => {
+        return item.idProduct === payload.idProduct
+      })
+      if (!isCart) {
+        const item = payload
+        item.count = 1
+        state.carts.push(item)
+      } else {
+        state.carts = state.carts.filter((item) => {
+          return item.idProduct !== payload.idProduct
+        })
+      }
     }
   },
   actions: {
-    getAllProducts (context) {
+    getAllProducts (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3400/api/v1/icafe/product')
+        axios.get(`http://localhost:3400/api/v1/icafe/product${payload || ''}`)
           .then((res) => {
             console.log(res)
             context.commit('setAllProducts', res.data.result)
+            context.commit('setPaginations', res.data.paginations)
             resolve(res.data.result)
           })
           .catch((err) => {
@@ -43,18 +62,18 @@ export default new Vuex.Store({
         return response
       }, function (error) {
         console.log(error.response.data.result.message)
-        if (error.response.status === 401) {
-          console.log(error.response)
-          if (error.response.data.result.message === 'Token invalid !') {
+        if (error.response.status === 403) {
+          console.log(error.response.status)
+          if (error.response.data.result.message === 'Token Expired !') {
             context.commit('setToken', null)
             localStorage.removeItem('token')
-            router.push('/login')
-            alert('Fatal! Not allowed to change tokens')
-          } else if (error.response.data.result.message === 'token expired') {
+            router.push('Login')
+            Vue.swal('Error', 'Please login again !', 'error')
+          } else if (error.response.data.result.message === 'Token invalid !') {
             context.commit('setToken', null)
             localStorage.removeItem('token')
-            router.push('/login')
-            alert('Please Login Again')
+            router.push('Login')
+            Vue.swal('Error', 'Some kind of error', 'error')
           }
         }
         return Promise.reject(error)
@@ -92,6 +111,7 @@ export default new Vuex.Store({
       })
     },
     deleteProduct (context, payload) {
+      console.log(payload)
       return new Promise((resolve, reject) => {
         axios.delete('http://localhost:3400/api/v1/icafe/product/' + payload)
           .then((res) => {
@@ -132,6 +152,15 @@ export default new Vuex.Store({
   getters: {
     allProducts (state) {
       return state.products
+    },
+    getPage (state) {
+      return state.paginations
+    },
+    getCart (state) {
+      return state.carts
+    },
+    countCart (state) {
+      return state.carts.length
     }
   },
   modules: {

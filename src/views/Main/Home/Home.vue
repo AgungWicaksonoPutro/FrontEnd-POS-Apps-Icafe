@@ -9,12 +9,14 @@
             <div class="row no-gutters">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mx-4 my-2">
                     <!-- Search form -->
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <input class="form-control" type="text" placeholder="Search" v-on:keyup.enter="setSearch" aria-label="Search">
                 </div>
             </div>
             <div class="row card-row no-gutters">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12" v-for="item in allProducts" :key="item.id">
-                    <CardProduct :data="item"/>
+                    <CardProduct
+                    :data="item"
+                    @select-product="addCart(item)"/>
                 </div>
             </div>
         </div>
@@ -45,7 +47,7 @@ import AddItems from '../../../components/_base/AddItems'
 import SumTransaction from '../../../components/_base/SumTransaction'
 import ButtonCheckout from '../../../components/_base/ButtonCheckout'
 import ButtonCancel from '../../../components/_base/ButtonCancel'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -58,10 +60,15 @@ export default {
     ButtonCancel
   },
   methods: {
-    ...mapActions(['getAllProducts'])
+    ...mapActions(['getAllProducts']),
+    ...mapMutations(['addCart']),
+    setSearch (e) {
+      const url = `?search=${e.target.value}`
+      this.getAllProducts(url)
+    }
   },
   computed: {
-    ...mapGetters(['allProducts'])
+    ...mapGetters(['allProducts', 'countCart', 'getCart'])
   },
   mounted () {
     this.getAllProducts()

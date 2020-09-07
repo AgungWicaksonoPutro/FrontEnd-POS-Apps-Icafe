@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-6 mt-3 text-left">
                     <h4 class="title-section">About</h4>
-                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias labore atque similique accusamus natus deleniti ab non doloremque temporibus. Voluptatem iste error temporibus perferendis blanditiis!</p>
+                    <p class="lead my-2">Rumah makan icafe yang menyajikan hidangan kepada masyarakat dan menyediakan tempat untuk menikmati hidangan tersebut serta menetapkan tarif tertentu untuk makanan dan pelayanannya. Meski pada umumnya rumah makan menyajikan makanan di tempat, tetapi ada juga beberapa yang menyediakan layanan take-out dining dan delivery service sebagai salah satu bentuk pelayanan kepada konsumennya.</p>
                     <button type="button" class="btn btn-warning">View more</button>
                 </div>
             </div>

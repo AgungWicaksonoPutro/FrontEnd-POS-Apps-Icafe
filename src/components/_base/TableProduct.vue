@@ -14,7 +14,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">NO</th>
                             <th scope="col">NAME</th>
                             <th scope="col">STOCK</th>
                             <th scope="col">DESCRIPTION</th>
@@ -25,21 +25,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in allProducts" :key="item.id" >
-                            <th scope="row">{{item.idProduct}}</th>
+                        <tr v-for="(item, index) in allProducts" :key="item.idProduct" >
+                            <th scope="row">{{index+1}}</th>
                             <td class="text-left">{{item.nameProduct}}</td>
                             <td>{{item.stockProduct}}</td>
                             <td class="text-left">{{item.descriptionProduct}}</td>
                             <td>{{item.priceProduct}}</td>
                             <td>
                                 <div class="image-container">
-                                    <img :src="item.imageProduct" alt="">
+                                    <img :src="item.imageProduct" alt="Food Image">
                                 </div>
                                 </td>
                             <td>{{item.idCategory}}</td>
                             <td>
                                 <button type="button" class="btn btn-warning my-2" @click="setUpdate(item)"><i class="far fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger" @click="deleteProduct(item)"><i class="fas fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-danger" @click="delProduct(item.idProduct)"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -71,7 +71,7 @@ export default {
     }
   }),
   methods: {
-    ...mapActions(['getAllProducts', 'insertProduct', 'editProduct', ' deleteProduct']),
+    ...mapActions(['getAllProducts', 'insertProduct', 'editProduct', 'deleteProduct']),
     toggleModal () {
       this.modalActive = !this.modalActive
       if (!this.modalActive) {
@@ -90,9 +90,9 @@ export default {
       this.dataModal.idCategory = data.idCategory
     },
     handleEventModal () {
-      this.dataModal.idProduct ? this.updateProduct() : this.addProdcut()
+      this.dataModal.idProduct ? this.updateProduct() : this.addProduct()
     },
-    addProdcut () {
+    addProduct () {
       const data = new FormData()
       data.append('nameProduct', this.dataModal.nameProduct)
       data.append('stockProduct', this.dataModal.stockProduct)
@@ -104,7 +104,7 @@ export default {
         .then(res => {
           this.clearModal()
           this.getAllProducts()
-          alert('insert berhasil')
+          this.$swal({ icon: 'success', title: 'Added' })
         })
     },
     updateProduct () {
@@ -122,8 +122,8 @@ export default {
       this.editProduct(container)
         .then(res => {
           this.clearModal()
+          this.$swal({ icon: 'success', title: 'Updated' })
           this.getAllProducts()
-          alert('update berhasil')
         })
     },
     clearModal () {
@@ -135,6 +135,30 @@ export default {
       this.dataModal.imageProduct = null
       this.dataModal.idCategory = 0
       this.modalActive = false
+    },
+    delProduct (data) {
+      const id = data
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deleteProduct(id)
+            .then(res => {
+              this.$swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.getAllProducts()
+            })
+        }
+      })
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
     <div class="card bg-transparent">
         <a class="nav-link" href="#">
-            <div class="image-container">
+            <div class="image-container" @click="$emit('select-product')">
                 <img :src="data.imageProduct" class="card-img-top" alt="blackforest">
             </div>
             <div class="card-body d-flex align-items-start flex-column">
@@ -15,7 +15,14 @@
 <script>
 export default {
   name: 'CardProduct',
-  props: ['data']
+  props: {
+    data: {
+      type: Object
+    },
+    active: {
+      type: Boolean
+    }
+  }
 }
 </script>
 

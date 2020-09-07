@@ -7,7 +7,7 @@
             <div class="bg-image"></div>
             <div class="container body-jumbotron text-left">
                 <h4 class="display-4">Choose and taste to your place</h4>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptatem maxime est beatae dicta corrupti assumenda eius eos quo illo. Maiores voluptates reiciendis eum perferendis.</p>
+                <p class="lead my-4">If you really want to make a friend, go to someone’s house and eat with him or her. The people who give you their food give you their heart</p>
                 <button type="button" class="btn btn-warning">Get Started</button>
             </div>
         </div>
@@ -31,6 +31,7 @@ export default {
     position: absolute;
     top: 100px;
     left: 60px;
+    letter-spacing: 2px;
 }
 
 .bg-image {
