@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -37,6 +38,28 @@ export default new Vuex.Store({
           })
       })
     },
+    interceptorsResponse (context) {
+      axios.interceptors.response.use(function (response) {
+        return response
+      }, function (error) {
+        console.log(error.response.data.result.message)
+        if (error.response.status === 401) {
+          console.log(error.response)
+          if (error.response.data.result.message === 'Token invalid !') {
+            context.commit('setToken', null)
+            localStorage.removeItem('token')
+            router.push('/login')
+            alert('Fatal! Not allowed to change tokens')
+          } else if (error.response.data.result.message === 'token expired') {
+            context.commit('setToken', null)
+            localStorage.removeItem('token')
+            router.push('/login')
+            alert('Please Login Again')
+          }
+        }
+        return Promise.reject(error)
+      })
+    },
     interceptorRequest (context) {
       axios.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${context.state.token}`
@@ -48,6 +71,29 @@ export default new Vuex.Store({
     insertProduct (context, payload) {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3400/api/v1/icafe/product', payload)
+          .then((res) => {
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    editProduct (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.patch('http://localhost:3400/api/v1/icafe/product/' + payload.id, payload.data)
+          .then((res) => {
+            console.log(res)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    deleteProduct (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.delete('http://localhost:3400/api/v1/icafe/product/' + payload)
           .then((res) => {
             resolve(res.data.result)
           })

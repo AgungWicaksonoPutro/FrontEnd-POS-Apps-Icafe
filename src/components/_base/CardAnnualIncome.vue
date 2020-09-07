@@ -24,7 +24,7 @@ export default {
     border: none;
 }
 .card.annual-income {
-    margin: 20px;
+    margin: 17px;
     flex-basis: 30%;
     background-image: linear-gradient(30deg,rgba(255, 255, 255, 0.712), rgba(170, 132, 200, 0.726));
     box-shadow: 2px 5px 5px rgba(170, 132, 200, 0.726);

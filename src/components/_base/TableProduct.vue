@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in allProducts" :key="item.id">
+                        <tr v-for="item in allProducts" :key="item.id" >
                             <th scope="row">{{item.idProduct}}</th>
                             <td class="text-left">{{item.nameProduct}}</td>
                             <td>{{item.stockProduct}}</td>
@@ -38,15 +38,15 @@
                                 </td>
                             <td>{{item.idCategory}}</td>
                             <td>
-                                <button type="button" class="btn btn-warning my-2"><i class="far fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-warning my-2" @click="setUpdate(item)"><i class="far fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger" @click="deleteProduct(item)"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <Modal v-show="modalActive"/>
+        <Modal v-show="modalActive" :data="dataModal" @close-modal="toggleModal" @handle-event="handleEventModal"/>
     </div>
 </template>
 
@@ -59,7 +59,7 @@ export default {
     Modal
   },
   data: () => ({
-    modalActive: true,
+    modalActive: false,
     dataModal: {
       idProduct: null,
       nameProduct: '',
@@ -67,19 +67,64 @@ export default {
       descriptionProduct: '',
       priceProduct: 0,
       imageProduct: null,
-      idcategory: 0
+      idCategory: 0
     }
   }),
   methods: {
-    ...mapActions(['getAllProducts']),
+    ...mapActions(['getAllProducts', 'insertProduct', 'editProduct', ' deleteProduct']),
     toggleModal () {
       this.modalActive = !this.modalActive
       if (!this.modalActive) {
         this.clearModal()
       }
     },
+    setUpdate (data) {
+      console.log(data)
+      this.modalActive = true
+      this.dataModal.idProduct = data.idProduct
+      this.dataModal.nameProduct = data.nameProduct
+      this.dataModal.stockProduct = data.stockProduct
+      this.dataModal.descriptionProduct = data.descriptionProduct
+      this.dataModal.priceProduct = data.priceProduct
+      this.dataModal.imageProduct = data.imageProduct
+      this.dataModal.idCategory = data.idCategory
+    },
     handleEventModal () {
-      this.dataModal.id ? this.updateProduct() : this.addProdcut()
+      this.dataModal.idProduct ? this.updateProduct() : this.addProdcut()
+    },
+    addProdcut () {
+      const data = new FormData()
+      data.append('nameProduct', this.dataModal.nameProduct)
+      data.append('stockProduct', this.dataModal.stockProduct)
+      data.append('descriptionProduct', this.dataModal.descriptionProduct)
+      data.append('priceProduct', this.dataModal.priceProduct)
+      data.append('imageProduct', this.dataModal.imageProduct)
+      data.append('idCategory', this.dataModal.idCategory)
+      this.insertProduct(data)
+        .then(res => {
+          this.clearModal()
+          this.getAllProducts()
+          alert('insert berhasil')
+        })
+    },
+    updateProduct () {
+      const data = new FormData()
+      data.append('nameProduct', this.dataModal.nameProduct)
+      data.append('stockProduct', this.dataModal.stockProduct)
+      data.append('descriptionProduct', this.dataModal.descriptionProduct)
+      data.append('priceProduct', this.dataModal.priceProduct)
+      data.append('imageProduct', this.dataModal.imageProduct)
+      data.append('idCategory', this.dataModal.idCategory)
+      const container = {
+        id: this.dataModal.idProduct,
+        data: data
+      }
+      this.editProduct(container)
+        .then(res => {
+          this.clearModal()
+          this.getAllProducts()
+          alert('update berhasil')
+        })
     },
     clearModal () {
       this.dataModal.idProduct = null
@@ -88,7 +133,8 @@ export default {
       this.dataModal.descriptionProduct = ''
       this.dataModal.priceProduct = 0
       this.dataModal.imageProduct = null
-      this.dataModal.idcategory = 0
+      this.dataModal.idCategory = 0
+      this.modalActive = false
     }
   },
   computed: {
@@ -119,6 +165,6 @@ button{
     width: 50px;
 }
 .btn-primary{
-    width: 80%;
+    width: 100%;
 }
 </style>

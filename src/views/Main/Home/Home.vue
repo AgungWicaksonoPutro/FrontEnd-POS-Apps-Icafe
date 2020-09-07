@@ -6,6 +6,12 @@
             <VerticalNav/>
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-10 bg-grey center">
+            <div class="row no-gutters">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mx-4 my-2">
+                    <!-- Search form -->
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
             <div class="row card-row no-gutters">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12" v-for="item in allProducts" :key="item.id">
                     <CardProduct :data="item"/>
