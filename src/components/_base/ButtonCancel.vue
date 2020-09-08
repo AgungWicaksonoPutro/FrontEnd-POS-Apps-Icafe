@@ -1,12 +1,16 @@
 <template>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        <button type="button" class="btn btn-danger">Cancel</button>
+        <button @click="emptyCart" type="button" class="btn btn-danger">Cancel</button>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
-  name: 'ButtonCancel'
+  name: 'ButtonCancel',
+  methods: {
+    ...mapMutations(['emptyCart'])
+  }
 }
 </script>
 

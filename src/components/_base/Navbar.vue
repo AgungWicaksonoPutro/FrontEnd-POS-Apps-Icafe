@@ -13,7 +13,7 @@
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
         <ul class="nav mt-2 mb-2">
-            <li class="mx-auto nav-item "><a class="nav-link text-dark active" href="#"><p class="cart-nav">Cart <span class="badge badge-pill badge-info">{{countCart}}</span></p></a></li>
+            <li class="mx-auto nav-item "><a class="nav-link text-dark active" href="#"><p class="cart-nav">Cart <span class="badge badge-pill badge-info">{{totalQty}}</span></p></a></li>
         </ul>
     </div>
 </nav>
@@ -24,7 +24,10 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
   computed: {
-    ...mapGetters(['countCart'])
+    ...mapGetters(['getCart']),
+    totalQty () {
+      return this.getCart.reduce((a, b) => a + b.qty, 0)
+    }
   }
 }
 </script>

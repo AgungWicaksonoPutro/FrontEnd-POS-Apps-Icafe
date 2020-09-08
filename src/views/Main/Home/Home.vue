@@ -11,6 +11,13 @@
                     <!-- Search form -->
                     <input class="form-control" type="text" placeholder="Search" v-on:keyup.enter="setSearch" aria-label="Search">
                 </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mx-3 my-2">
+                <select id="sort" class="form-control" @change="setSort">
+                    <option selected> - pilih - </option>
+                    <option value="priceProduct">Price Min - Max</option>
+                    <option value="nameProduct">Name</option>
+                </select>
+                </div>
             </div>
             <div class="row card-row no-gutters">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12" v-for="item in allProducts" :key="item.id">
@@ -30,12 +37,13 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-3 text-left"><p>*Belum termasuk ppn</p></div>
                 </div>
                 <div class="row button-execute no-gutters">
-                    <ButtonCheckout/>
+                    <ButtonCheckout @event-checkout="toggleModal"/>
                     <ButtonCancel/>
                 </div>
             </div>
         </div>
     </div>
+    <ModalCheckout v-show="modalActive" @close-modal="toggleModal"/>
 </div>
 </template>
 
@@ -47,9 +55,15 @@ import AddItems from '../../../components/_base/AddItems'
 import SumTransaction from '../../../components/_base/SumTransaction'
 import ButtonCheckout from '../../../components/_base/ButtonCheckout'
 import ButtonCancel from '../../../components/_base/ButtonCancel'
+import ModalCheckout from '../../../components/_base/ModalCheckout'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Home',
+  data () {
+    return {
+      modalActive: false
+    }
+  },
   components: {
     VerticalNav,
     CardProduct,
@@ -57,18 +71,34 @@ export default {
     AddItems,
     SumTransaction,
     ButtonCheckout,
-    ButtonCancel
+    ButtonCancel,
+    ModalCheckout
   },
   methods: {
-    ...mapActions(['getAllProducts']),
+    ...mapActions(['getAllProducts', 'addHistory']),
     ...mapMutations(['addCart']),
     setSearch (e) {
       const url = `?search=${e.target.value}`
       this.getAllProducts(url)
+    },
+    toggleModal () {
+      if (!this.modalActive) {
+        this.addHistory()
+      }
+      this.modalActive = !this.modalActive
+    },
+    setSort (e) {
+      console.log(e.target)
+      const url = `?sort=${e.target.value}`
+      this.getAllProducts(url)
+    },
+    setSortData (e) {
+      const url = `?typeSort=${e.target.value}`
+      this.getAllProducts(url)
     }
   },
   computed: {
-    ...mapGetters(['allProducts', 'countCart', 'getCart'])
+    ...mapGetters(['allProducts', 'getCart'])
   },
   mounted () {
     this.getAllProducts()

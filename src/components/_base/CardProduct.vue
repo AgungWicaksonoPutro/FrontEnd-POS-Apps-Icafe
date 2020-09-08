@@ -6,7 +6,7 @@
             </div>
             <div class="card-body d-flex align-items-start flex-column">
                 <p class="card-text text-left">{{data.nameProduct}}</p>
-                <h6>Rp. {{data.priceProduct}}</h6>
+                <h6>Rp. {{(data.priceProduct).toLocaleString('de-DE')}}</h6>
             </div>
         </a>
     </div>

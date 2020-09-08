@@ -21,12 +21,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">#10928</th>
-                            <td>Cashier 1</td>
-                            <td>06 October 2019</td>
-                            <td>Ice Tea, Salad with Coconuth</td>
-                            <td>Rp. 120.000</td>
+                        <tr v-for="(item) in allHistory" :key="item.idHistory">
+                            <th scope="row">{{item.invoices}}</th>
+                            <td>{{item.idEmploye}}</td>
+                            <td>{{item.createAt}}</td>
+                            <td class="text-left">{{item.orders}}</td>
+                            <td>Rp. {{item.amounts.toLocaleString('de-DE')}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -36,8 +36,18 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: 'TableOrders'
+  name: 'TableOrders',
+  methods: {
+    ...mapActions(['getAllHistory'])
+  },
+  computed: {
+    ...mapGetters(['allHistory'])
+  },
+  mounted () {
+    this.getAllHistory()
+  }
 }
 </script>
 

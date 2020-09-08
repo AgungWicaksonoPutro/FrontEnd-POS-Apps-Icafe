@@ -1,6 +1,6 @@
 <template>
     <div class="row no-gutters mx-2 my-2">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 shadow-sm bg-white border-radius p-2" v-for="item in getCart" :key="item.idProduct">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 shadow-sm bg-white border-radius my-1" v-for="item in getCart" :key="item.idProduct">
             <div class="row no-gutters">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                     <div class="row no-gutters">
@@ -11,7 +11,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 d-flex flex-column">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 d-flex flex-column p-1">
                     <div class="row no-gutters top">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-left">{{item.nameProduct}}</div>
                     </div>
@@ -20,12 +20,12 @@
                             <div class="row no-gutters">
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                     <div class="row no-gutters d-flex justify-content-center flex-wrap">
-                                        <button class="col">-</button>
-                                        <div class="col control-num">1</div>
-                                        <button class="col">+</button>
+                                        <button @click="reduceQty(item)" class="col">-</button>
+                                        <div class="col control-num">{{item.qty}}</div>
+                                        <button @click="addQty(item)" class="col">+</button>
                                     </div>
                                 </div>
-                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">Rp. {{item.priceProduct}}</div>
+                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">Rp. {{(item.priceProduct*item.qty).toLocaleString('de-DE')}}</div>
                             </div>
                         </div>
                     </div>
@@ -36,11 +36,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'AddItems',
   data () {
     return {}
+  },
+  methods: {
+    ...mapMutations(['addQty', 'reduceQty'])
   },
   computed: {
     ...mapGetters(['getCart'])

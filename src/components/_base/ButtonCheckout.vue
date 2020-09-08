@@ -1,6 +1,6 @@
 <template>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
-        <button type="button" class="btn btn-primary">Checkout</button>
+        <button  @click="$emit('event-checkout')" type="button" class="btn btn-primary">Checkout</button>
     </div>
 </template>
 

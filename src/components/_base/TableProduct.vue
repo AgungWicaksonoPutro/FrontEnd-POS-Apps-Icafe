@@ -30,7 +30,7 @@
                             <td class="text-left">{{item.nameProduct}}</td>
                             <td>{{item.stockProduct}}</td>
                             <td class="text-left">{{item.descriptionProduct}}</td>
-                            <td>{{item.priceProduct}}</td>
+                            <td>Rp. {{(item.priceProduct).toLocaleString('de-DE')}}</td>
                             <td>
                                 <div class="image-container">
                                     <img :src="item.imageProduct" alt="Food Image">

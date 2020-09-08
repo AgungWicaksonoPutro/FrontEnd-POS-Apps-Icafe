@@ -10,11 +10,15 @@ export default new Vuex.Store({
     products: [],
     user: {},
     token: localStorage.getItem('token') || null,
-    carts: []
+    carts: [],
+    history: []
   },
   mutations: {
     setAllProducts (state, payload) {
       state.products = payload
+    },
+    setAllHistory (state, payload) {
+      state.history = payload
     },
     setUser (state, payload) {
       state.user = payload
@@ -32,13 +36,34 @@ export default new Vuex.Store({
       })
       if (!isCart) {
         const item = payload
-        item.count = 1
-        state.carts.push(item)
+        state.carts.push({ ...item, qty: 1 })
       } else {
         state.carts = state.carts.filter((item) => {
           return item.idProduct !== payload.idProduct
         })
       }
+    },
+    addQty (state, payload) {
+      const isCart = state.carts.find((item) => {
+        return item.idProduct === payload.idProduct
+      })
+      isCart.qty++
+    },
+    removeFromCart (state, payload) {
+      state.carts = state.carts.filter((item) => { return item.idProduct !== payload.idProduct })
+    },
+    reduceQty (state, payload) {
+      const isCart = state.carts.find((item) => {
+        return item.idProduct === payload.idProduct
+      })
+      if (isCart.qty > 1) {
+        isCart.qty--
+      } else {
+        state.carts = state.carts.filter((item) => { return item.idProduct !== payload.idProduct })
+      }
+    },
+    emptyCart (state) {
+      state.carts = []
     }
   },
   actions: {
@@ -147,11 +172,46 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    addHistory ({ state, getters }) {
+      const data = {}
+      data.invoices = 1
+      data.idEmploye = 1
+      data.orders = state.carts.map((item) => {
+        return item.nameProduct
+      }).join(', ')
+      data.amounts = Number(getters.getPricing) * 110 / 100
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:3400/api/v1/icafe/history/', data)
+          .then((res) => {
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    getAllHistory (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:3400/api/v1/icafe/history${payload || ''}`)
+          .then((res) => {
+            console.log(res)
+            context.commit('setAllHistory', res.data.result)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            console.log(err)
+            reject(err)
+          })
+      })
     }
   },
   getters: {
     allProducts (state) {
       return state.products
+    },
+    allHistory (state) {
+      return state.history
     },
     getPage (state) {
       return state.paginations
@@ -159,8 +219,8 @@ export default new Vuex.Store({
     getCart (state) {
       return state.carts
     },
-    countCart (state) {
-      return state.carts.length
+    getPricing (state) {
+      return state.carts.reduce((a, b) => a + b.qty * b.priceProduct, 0)
     }
   },
   modules: {
