@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid no-gutters">
       <router-link class="btn" :to="{name: 'LandingPage'}"><i class="fas fa-long-arrow-alt-left"></i> Back</router-link>
-
     </div>
 </template>
 
