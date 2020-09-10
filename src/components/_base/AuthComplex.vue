@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid no-gutters">
+      <router-link class="btn" :to="{name: 'LandingPage'}"><i class="fas fa-long-arrow-alt-left"></i> Back</router-link>
 
     </div>
 </template>
@@ -18,5 +19,11 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+.btn {
+  position: absolute;
+  left: 50px;
+  top: 15px;
+  font-size: 18px;
 }
 </style>

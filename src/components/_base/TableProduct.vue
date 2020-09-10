@@ -36,7 +36,7 @@
                                     <img :src="item.imageProduct" alt="Food Image">
                                 </div>
                                 </td>
-                            <td>{{item.idCategory}}</td>
+                            <td>{{item.categoryName}}</td>
                             <td>
                                 <button type="button" class="btn btn-warning my-2" @click="setUpdate(item)"><i class="far fa-edit"></i></button>
                                 <button type="button" class="btn btn-danger" @click="delProduct(item.idProduct)"><i class="fas fa-trash-alt"></i></button>

@@ -53,10 +53,14 @@
                         </div>
                         <div class="form add-data d-flex text-left my-2">
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 label">
-                                <label for="name">Id Category</label>
+                                <label for="name">Category</label>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
-                                <input type="text" v-model="data.idCategory" class="form-control 5 shadow-sm" name="name" id="name">
+                                <select name="CategoryName" v-model="data.idCategory" class="border">
+                                    <option disabled value="">Please Select One</option>
+                                    <option value="4">Food</option>
+                                    <option value="1">Drink</option>
+                                </select>
                             </div>
                         </div>
                     </div>

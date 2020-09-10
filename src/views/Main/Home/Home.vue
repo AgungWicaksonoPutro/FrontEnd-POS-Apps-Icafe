@@ -75,7 +75,7 @@ export default {
     ModalCheckout
   },
   methods: {
-    ...mapActions(['getAllProducts', 'addHistory']),
+    ...mapActions(['getAllProducts', 'addHistory', 'numberInvoice']),
     ...mapMutations(['addCart']),
     setSearch (e) {
       const url = `?search=${e.target.value}`
@@ -83,6 +83,7 @@ export default {
     },
     toggleModal () {
       if (!this.modalActive) {
+        this.numberInvoice()
         this.addHistory()
       }
       this.modalActive = !this.modalActive

@@ -11,8 +11,8 @@
                             </div>
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5 text-right Receipt">
                                 <div class="row no-gutters">
-                                    <div v-if="getCart.length" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        Receipt no: #010410919
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        Receipt no:
                                     </div>
                                 </div>
                             </div>

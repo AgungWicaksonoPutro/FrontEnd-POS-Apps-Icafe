@@ -43,6 +43,9 @@ export default new Vuex.Store({
         })
       }
     },
+    deleteToken (state) {
+      state.token = null
+    },
     addQty (state, payload) {
       const isCart = state.carts.find((item) => {
         return item.idProduct === payload.idProduct
@@ -86,9 +89,7 @@ export default new Vuex.Store({
       axios.interceptors.response.use(function (response) {
         return response
       }, function (error) {
-        console.log(error.response.data.result.message)
         if (error.response.status === 403) {
-          console.log(error.response.status)
           if (error.response.data.result.message === 'Token Expired !') {
             context.commit('setToken', null)
             localStorage.removeItem('token')
@@ -172,6 +173,11 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    logOut (context) {
+      context.commit('deleteToken')
+      localStorage.removeItem('token')
+      router.push('LandingPage')
     },
     addHistory ({ state, getters }) {
       const data = {}
