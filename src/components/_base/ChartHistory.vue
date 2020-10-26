@@ -10,14 +10,73 @@
                     </select>
                 </div>
             </div>
-                <canvas></canvas>
+                <line-chart :chartData="datacollection" :options="options" :styles="myStyles"></line-chart>
             </div>
     </div>
 </template>
 
 <script>
+import LineChart from './ChartMonthly'
+import { mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
-  name: 'ChartHistory'
+  name: 'ChartHistory',
+  components: {
+    LineChart
+  },
+  data () {
+    return {
+      datacollection: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Month',
+            borderColor: '#f87979',
+            backgroundColor: '#f87979',
+            fill: false,
+            data: []
+          }, {
+            label: 'Data One',
+            borderColor: '#f87979',
+            backgroundColor: '#f87979',
+            fill: false,
+            data: []
+          }
+        ]
+      },
+      height: 450,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['allHistory']),
+    myStyles () {
+      return {
+        height: `${this.height}px`,
+        position: 'relative'
+      }
+    }
+  },
+  mounted () {
+    const tabData = this.allHistory
+    tabData.forEach(d => {
+      const date = moment(d.createAt).format('ll')
+      console.log(date)
+      const {
+        amounts
+      } = d
+      console.log(amounts)
+      this.datacollection.labels.push(date)
+      this.datacollection.datasets[0].data.push(amounts)
+    })
+    console.log(this.datacollection.labels)
+  },
+  methods: {
+
+  }
 }
 </script>
 

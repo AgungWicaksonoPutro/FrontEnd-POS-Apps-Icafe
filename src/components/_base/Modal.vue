@@ -16,7 +16,7 @@
                                 <label for="name">Product Name</label>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
-                                <input type="text" v-model="data.nameProduct" class="form-control 1 shadow-sm" name="name" id="name">
+                                <input type="text" v-model="data.nameProduct" class="form-control 1 shadow-sm">
                             </div>
                         </div>
                         <div class="form add-data d-flex text-left my-2">
@@ -24,7 +24,7 @@
                                 <label for="name">Stock Product</label>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
-                                <input type="text" v-model="data.stockProduct" class="form-control 2 shadow-sm" name="name" id="name">
+                                <input type="text" v-model="data.stockProduct" class="form-control 2 shadow-sm">
                             </div>
                         </div>
                         <div class="form add-data d-flex text-left my-2">
@@ -32,7 +32,7 @@
                                 <label for="name">Description Product</label>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
-                                <input type="text" v-model="data.descriptionProduct" class="form-control 3 shadow-sm" name="name" id="name">
+                                <input type="text" v-model="data.descriptionProduct" class="form-control 3 shadow-sm">
                             </div>
                         </div>
                         <div class="form add-data d-flex text-left my-2">
@@ -40,7 +40,7 @@
                                 <label for="name">Image Product</label>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
-                                <input type="file" @change="handleImage" name="name" id="name">
+                                <input type="file" @change="handleImage">
                             </div>
                         </div>
                         <div class="form add-data d-flex text-left my-2">
@@ -48,7 +48,7 @@
                                 <label for="name">Price Product</label>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
-                                <input type="text" v-model="data.priceProduct" class="form-control 4 shadow-sm" name="name" id="name">
+                                <input type="text" v-model="data.priceProduct" class="form-control 4 shadow-sm">
                             </div>
                         </div>
                         <div class="form add-data d-flex text-left my-2">

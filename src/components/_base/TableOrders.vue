@@ -57,7 +57,7 @@ export default {
     setPage (e) {
       if (e != null) {
         const url = `?page=${e}`
-        this.getAllProducts(url)
+        this.getAllHistory(url)
       }
     }
   },
