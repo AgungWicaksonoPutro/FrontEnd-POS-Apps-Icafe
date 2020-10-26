@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 input name">
                                 <select name="CategoryName" v-model="data.idCategory" class="border">
-                                    <option disabled value="">Please Select One</option>
+                                    <option selected disabled>Please Select One</option>
                                     <option value="4">Food</option>
                                     <option value="1">Drink</option>
                                 </select>

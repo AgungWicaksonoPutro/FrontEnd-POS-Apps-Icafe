@@ -7,16 +7,21 @@
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-10 bg-grey center">
             <div class="row no-gutters">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mx-4 my-2">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mx-3 my-2">
                     <!-- Search form -->
                     <input class="form-control" type="text" placeholder="Search" v-on:keyup.enter="setSearch" aria-label="Search">
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mx-3 my-2">
                 <select id="sort" class="form-control" @change="setSort">
-                    <option selected> - pilih - </option>
+                    <option selected disabled> - pilih - </option>
                     <option value="priceProduct">Price Min - Max</option>
                     <option value="nameProduct">Name</option>
                 </select>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mx-3 my-2">
+                  <Pagination
+                  :data="getPage"
+                  @select-page="setPage"/>
                 </div>
             </div>
             <div class="row card-row no-gutters">
@@ -56,6 +61,7 @@ import SumTransaction from '../../../components/_base/SumTransaction'
 import ButtonCheckout from '../../../components/_base/ButtonCheckout'
 import ButtonCancel from '../../../components/_base/ButtonCancel'
 import ModalCheckout from '../../../components/_base/ModalCheckout'
+import Pagination from '../../../components/_base/Paginations'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Home',
@@ -72,18 +78,20 @@ export default {
     SumTransaction,
     ButtonCheckout,
     ButtonCancel,
-    ModalCheckout
+    ModalCheckout,
+    Pagination
   },
   methods: {
-    ...mapActions(['getAllProducts', 'addHistory', 'numberInvoice']),
-    ...mapMutations(['addCart']),
+    ...mapActions(['getAllProducts', 'addHistory']),
+    ...mapMutations(['addCart', 'setInvoice']),
     setSearch (e) {
       const url = `?search=${e.target.value}`
       this.getAllProducts(url)
     },
     toggleModal () {
       if (!this.modalActive) {
-        this.numberInvoice()
+        const invoceNum = '#' + Math.floor(Math.random() * 99999)
+        this.setInvoice(invoceNum)
         this.addHistory()
       }
       this.modalActive = !this.modalActive
@@ -96,10 +104,16 @@ export default {
     setSortData (e) {
       const url = `?typeSort=${e.target.value}`
       this.getAllProducts(url)
+    },
+    setPage (e) {
+      if (e != null) {
+        const url = `?page=${e}`
+        this.getAllProducts(url)
+      }
     }
   },
   computed: {
-    ...mapGetters(['allProducts', 'getCart'])
+    ...mapGetters(['allProducts', 'getCart', 'getPage'])
   },
   mounted () {
     this.getAllProducts()

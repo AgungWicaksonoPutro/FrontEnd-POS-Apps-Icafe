@@ -11,9 +11,17 @@ export default new Vuex.Store({
     user: {},
     token: localStorage.getItem('token') || null,
     carts: [],
-    history: []
+    history: [],
+    headerTransaction: {},
+    paginations: []
   },
   mutations: {
+    setInvoice (state, payload) {
+      const data = {}
+      data.invoice = payload
+      data.cashier = state.user.firstName
+      state.headerTransaction = data
+    },
     setAllProducts (state, payload) {
       state.products = payload
     },
@@ -36,7 +44,10 @@ export default new Vuex.Store({
       })
       if (!isCart) {
         const item = payload
-        state.carts.push({ ...item, qty: 1 })
+        state.carts.push({
+          ...item,
+          qty: 1
+        })
       } else {
         state.carts = state.carts.filter((item) => {
           return item.idProduct !== payload.idProduct
@@ -72,9 +83,8 @@ export default new Vuex.Store({
   actions: {
     getAllProducts (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3400/api/v1/icafe/product${payload || ''}`)
+        axios.get(process.env.VUE_APP_API_URL + `product${payload || ''}`)
           .then((res) => {
-            console.log(res)
             context.commit('setAllProducts', res.data.result)
             context.commit('setPaginations', res.data.paginations)
             resolve(res.data.result)
@@ -115,7 +125,7 @@ export default new Vuex.Store({
     },
     insertProduct (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3400/api/v1/icafe/product', payload)
+        axios.post(process.env.VUE_APP_API_URL + 'product', payload)
           .then((res) => {
             resolve(res.data.result)
           })
@@ -126,9 +136,8 @@ export default new Vuex.Store({
     },
     editProduct (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.patch('http://localhost:3400/api/v1/icafe/product/' + payload.id, payload.data)
+        axios.patch(process.env.VUE_APP_API_URL + 'product/' + payload.id, payload.data)
           .then((res) => {
-            console.log(res)
             resolve(res.data.result)
           })
           .catch((err) => {
@@ -139,7 +148,7 @@ export default new Vuex.Store({
     deleteProduct (context, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {
-        axios.delete('http://localhost:3400/api/v1/icafe/product/' + payload)
+        axios.delete(process.env.VUE_APP_API_URL + 'product/' + payload)
           .then((res) => {
             resolve(res.data.result)
           })
@@ -150,7 +159,7 @@ export default new Vuex.Store({
     },
     register (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3400/api/v1/icafe/users/register', payload)
+        axios.post(process.env.VUE_APP_API_URL + 'users/register', payload)
           .then((res) => {
             resolve(res.data.result)
           })
@@ -161,7 +170,7 @@ export default new Vuex.Store({
     },
     login (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3400/api/v1/icafe/users/login', payload)
+        axios.post(process.env.VUE_APP_API_URL + 'users/login', payload)
           .then((res) => {
             context.commit('setUser', res.data.result)
             localStorage.setItem('token', res.data.result.token)
@@ -181,14 +190,14 @@ export default new Vuex.Store({
     },
     addHistory ({ state, getters }) {
       const data = {}
-      data.invoices = 1
-      data.idEmploye = 1
+      data.invoices = state.headerTransaction.invoice
+      data.employe = state.headerTransaction.cashier
       data.orders = state.carts.map((item) => {
         return item.nameProduct
       }).join(', ')
       data.amounts = Number(getters.getPricing) * 110 / 100
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3400/api/v1/icafe/history/', data)
+        axios.post(process.env.VUE_APP_API_URL + 'history/', data)
           .then((res) => {
             resolve(res.data.result)
           })
@@ -199,10 +208,11 @@ export default new Vuex.Store({
     },
     getAllHistory (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3400/api/v1/icafe/history${payload || ''}`)
+        axios.get(process.env.VUE_APP_API_URL + `history${payload || ''}`)
           .then((res) => {
             console.log(res)
             context.commit('setAllHistory', res.data.result)
+            context.commit('setPaginations', res.data.paginations)
             resolve(res.data.result)
           })
           .catch((err) => {
@@ -227,6 +237,9 @@ export default new Vuex.Store({
     },
     getPricing (state) {
       return state.carts.reduce((a, b) => a + b.qty * b.priceProduct, 0)
+    },
+    getHeaderTrans (state) {
+      return state.headerTransaction
     }
   },
   modules: {

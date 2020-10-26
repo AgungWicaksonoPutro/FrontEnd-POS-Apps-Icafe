@@ -1,48 +1,104 @@
 <template>
-<form class=" text-left">
+<b-form class="form text-left">
   <div class="nav-bar">
     <img src="../../assets/Logo-Login.png" alt="Logo">
   </div>
   <h2 class="text-left">Sign up.</h2>
   <p class="text-left">Give us some of your information to get free accsess to fieldly</p>
-  <div class="form-group">
+  <b-form-group class="form-group">
     <label for="InputfirstName">First Name</label>
-    <input type="text" class="form-control" id="inputFirstName" v-model="firstName" aria-describedby="firstNameHelp">
-  </div>
-  <div class="form-group">
+    <b-form-input
+      type="text"
+      class="form-control"
+      id="inputFirstName"
+      v-model="$v.form.firstName.$model"
+      :state="validateFirstName ('firstName')"
+      aria-describedby="firstNameHelp">
+      </b-form-input>
+    <b-form-invalid-feedback id="input-1-live-feedback">This is a required field.</b-form-invalid-feedback>
+  </b-form-group>
+  <b-form-group class="form-group">
     <label for="InputLastName">Last Name</label>
-    <input type="text" class="form-control" id="inputLastName" v-model="lastName" aria-describedby="lastNameHelp">
-  </div>
-  <div class="form-group">
+    <b-form-input
+     type="text"
+      class="form-control"
+      id="inputLastName"
+      v-model="$v.form.lastName.$model"
+      :state="validateLastName ('lastName')"
+      aria-describedby="lastNameHelp">
+      </b-form-input>
+    <b-form-invalid-feedback id="input-1-live-feedback">This is a required field.</b-form-invalid-feedback>
+  </b-form-group>
+  <b-form-group class="form-group">
     <label for="InputEmail1">Email address</label>
-    <input type="email" class="form-control" id="InputEmail1" v-model="email" aria-describedby="emailHelp">
-  </div>
-  <div class="form-group">
+    <b-form-input
+    v-model="$v.form.email.$model"
+    class="form-control"
+    aria-describedby="emailHelp"
+    :state="validateEmail('email')"
+    type="email"
+    id="InputEmail1">
+    </b-form-input>
+    <b-form-invalid-feedback id="input-1-live-feedback">This is a required field.</b-form-invalid-feedback>
+  </b-form-group>
+  <b-form-group class="form-group">
     <label for="InputPassword1">Password</label>
-    <input type="password" class="form-control" v-model="password" id="InputPassword1">
-  </div>
-  <div class="form-group form-check">
+    <b-form-input
+    type="password"
+    class="form-control"
+    v-model="$v.form.password.$model"
+    :state="validatePassword ('password')"
+    id="InputPassword1">
+    </b-form-input>
+    <b-form-invalid-feedback id="input-2-live-feedback">This is a required field.</b-form-invalid-feedback>
+  </b-form-group>
+  <b-form-group class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="Check1">
     <label class="form-check-label" for="Check1">By creating account you agree to the <a href="#">term of us</a> and our <a href="#">privacy policy</a> </label>
-  </div>
+  </b-form-group>
   <button type="submit" class="btn btn-warning" @click="handleRegister">Sign Up</button>
-  <div class="form-group mt-3">
+  <b-form-group class="form-group mt-3">
   <label for="SignUp"><span>Already have an account </span><router-link :to="{name: 'Login'}" class="router-link">Log in</router-link></label>
-  </div>
-</form>
+  </b-form-group>
+</b-form>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import { required, minLength, email } from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
 export default {
   name: 'FormRegister',
+  mixins: [validationMixin],
   data () {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      roleId: 1
+      form: {
+        firstName: null,
+        lastName: null,
+        email: null,
+        password: null,
+        roleId: 1
+      }
+    }
+  },
+  validations: {
+    form: {
+      firstName: {
+        required,
+        minLength: minLength(4)
+      },
+      lastName: {
+        required,
+        minLength: minLength(4)
+      },
+      email: {
+        required,
+        email,
+        minLength: minLength(3)
+      },
+      password: {
+        required
+      }
     }
   },
   methods: {
@@ -60,16 +116,30 @@ export default {
           this.$router.push('/Login')
         })
     },
-    ...mapActions(['register'])
+    ...mapActions(['register']),
+    validateFirstName (firstName) {
+      const { $dirty, $error } = this.$v.form[firstName]
+      return $dirty ? !$error : null
+    },
+    validateLastName (lastName) {
+      const { $dirty, $error } = this.$v.form[lastName]
+      return $dirty ? !$error : null
+    },
+    validateEmail (email) {
+      const { $dirty, $error } = this.$v.form[email]
+      return $dirty ? !$error : null
+    },
+    validatePassword (password) {
+      const { $dirty, $error } = this.$v.form[password]
+      return $dirty ? !$error : null
+    }
   }
 }
 </script>
 
 <style scoped>
-form{
-  position: absolute;
-  left: 50px;
-  width: 70%;
+.form{
+  margin-left: 10px;
 }
 .form-group{
     font-size: 14px;

@@ -12,14 +12,14 @@
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5 text-right Receipt">
                                 <div class="row no-gutters">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        Receipt no:
+                                        Receipt no: {{getHeaderTrans.invoice}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row no-gutters mb-2">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 Cashier text-left">
-                                Cashier : Pevita Pearce
+                                Cashier : {{getHeaderTrans.cashier}}
                             </div>
                         </div>
                         <div class="row no-gutters my-1" v-for="item in getCart" :key="item.id">
@@ -58,7 +58,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters(['getCart', 'getPricing']),
+    ...mapGetters(['getCart', 'getPricing', 'getHeaderTrans']),
     setTax () {
       return this.getPricing * 0.1
     },

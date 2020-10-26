@@ -4,7 +4,9 @@
             <div class="header row d-flex">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 d-flex align-items-start title px-5 py-3">All Product</div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-5 d-flex align-items-start title px-5 py-3">
-                Pagination
+                <Pagination
+                :data="getPage"
+                @select-page="setPage"/>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 d-flex align-items-start title px-5 py-3">
                 <button type="button" class="btn btn-primary ml-auto"  @click="toggleModal"><i class="fas fa-plus"> Add New Product </i></button>
@@ -52,11 +54,13 @@
 
 <script>
 import Modal from './Modal'
+import Pagination from '../_base/Paginations'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'TableProduct',
   components: {
-    Modal
+    Modal,
+    Pagination
   },
   data: () => ({
     modalActive: false,
@@ -159,10 +163,16 @@ export default {
             })
         }
       })
+    },
+    setPage (e) {
+      if (e != null) {
+        const url = `?page=${e}`
+        this.getAllProducts(url)
+      }
     }
   },
   computed: {
-    ...mapGetters(['allProducts'])
+    ...mapGetters(['allProducts', 'getPage'])
   },
   mounted () {
     this.getAllProducts()
