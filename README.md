@@ -32,6 +32,7 @@ The point of sale or point of purchase is the time and place where a retail tran
 ![Image Banner](https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/blob/master/icafe.png)
 ![Image Banner](https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/blob/master/icafe1.png)
 ![Image Banner](https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/blob/master/icafe3.png)
+![Image Banner](https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/blob/master/icafe4.png)
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
