@@ -68,15 +68,6 @@ npm run serve
 - [Axios](https://www.npmjs.com/package/axios)
 - [Vuex](https://vuex.vuejs.org/)
 - [Vue-Router](https://router.vuejs.org/)
-- [Core-js](https://www.npmjs.com/package/core-js)
-- [vue-currency-filter](https://www.npmjs.com/package/vue-currency-filter)
-- [vue-multiselect](https://www.npmjs.com/package/vue-multiselect)
-- [vue-pincode-input](https://www.npmjs.com/package/vue-pincode-input)
-- [vue-owl-carousel](https://www.npmjs.com/package/xx-vue-owl-carousel)
-- [vue-sweetalert](https://www.npmjs.com/search?q=vue-sweetalert)
-- [vue-toast-notification](https://www.npmjs.com/package/vue-toast-notification)
-- [vue2-editor](https://www.npmjs.com/package/vue2-editor)
-
 
 ---
 
