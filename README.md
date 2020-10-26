@@ -11,7 +11,7 @@
   </p>
 </p>
 
-![Image Banner]()
+![Image Banner](https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/blob/master/icafe2.png)
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@
 
 The point of sale or point of purchase is the time and place where a retail transaction is completed. At the point of sale, the merchant calculates the amount owed by the customer, indicates that amount, may prepare an invoice for the customer, and indicates the options for the customer to make payment.
 
-![Image Banner]()
+![Image Banner](https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/blob/master/icafe.png)
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
