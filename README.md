@@ -1,24 +1,82 @@
-# icafe
+<br />
+<p align="center">
+  <h1 align="center">Frontend POS APP Icafe</h1>
 
-## Project setup
+  <p align="center">
+    <a href="https://zwallet.fwdev.online">View Demo</a>
+    ·
+    <a href="https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe/issues">Request Feature</a>
+  </p>
+</p>
+
+![Image Banner]()
+
+## Table of Contents
+
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Acknowledgements](#acknowledgements)
+- [Resource](#Resource)
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+The point of sale or point of purchase is the time and place where a retail transaction is completed. At the point of sale, the merchant calculates the amount owed by the customer, indicates that amount, may prepare an invoice for the customer, and indicates the options for the customer to make payment.
+
+![Image Banner]()
+
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
+
+### Built With
+
+- [Node.js](https://nodejs.org/en/)
+- [Vue.js](https://docs.vuejs.id/)
+- [Bootstrap-vue](https://bootstrap-vue.org/)
+
+### Installation
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/AgungWicaksonoPutro/FrontEnd-POS-Apps-Icafe.git
 ```
+
+2. Install NPM packages
+
+```sh
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+3. Compiles and hot-reloads for development
+```sh
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+<!-- ACKNOWLEDGEMENTS -->
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Acknowledgements
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [Axios](https://www.npmjs.com/package/axios)
+- [Vuex](https://vuex.vuejs.org/)
+- [Vue-Router](https://router.vuejs.org/)
+- [Core-js](https://www.npmjs.com/package/core-js)
+- [vue-currency-filter](https://www.npmjs.com/package/vue-currency-filter)
+- [vue-multiselect](https://www.npmjs.com/package/vue-multiselect)
+- [vue-pincode-input](https://www.npmjs.com/package/vue-pincode-input)
+- [vue-owl-carousel](https://www.npmjs.com/package/xx-vue-owl-carousel)
+- [vue-sweetalert](https://www.npmjs.com/search?q=vue-sweetalert)
+- [vue-toast-notification](https://www.npmjs.com/package/vue-toast-notification)
+- [vue2-editor](https://www.npmjs.com/package/vue2-editor)
+
+
+---
+
+## Resource
+
+
