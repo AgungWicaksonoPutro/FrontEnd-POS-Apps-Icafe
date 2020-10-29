@@ -20,7 +20,7 @@ export default {
   name: 'DailyIncome',
   data () {
     return {
-      income: null
+      income: 0
     }
   },
   computed: {

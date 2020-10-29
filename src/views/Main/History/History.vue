@@ -26,6 +26,7 @@ import VerticalNav from '../../../components/_base/VerticalNav'
 import CardHistory from '../../../components/_base/CardHistory'
 import ChartHistory from '../../../components/_base/ChartHistory'
 import Tableorders from '../../../components/_base/TableOrders'
+import { mapActions } from 'vuex'
 export default {
   name: 'History',
   components: {
@@ -34,6 +35,12 @@ export default {
     CardHistory,
     ChartHistory,
     Tableorders
+  },
+  methods: {
+    ...mapActions(['getAllHistory'])
+  },
+  mounted () {
+    this.getAllHistory()
   }
 }
 </script>

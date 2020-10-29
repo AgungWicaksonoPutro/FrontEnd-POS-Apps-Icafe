@@ -19,7 +19,7 @@ export default {
   name: 'DailyIncome',
   data () {
     return {
-      order: null
+      order: 0
     }
   },
   computed: {

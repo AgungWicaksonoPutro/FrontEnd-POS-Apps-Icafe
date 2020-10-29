@@ -20,7 +20,7 @@ export default {
   name: 'CardAnnualIncome',
   data () {
     return {
-      income: null
+      income: 0
     }
   },
   computed: {
