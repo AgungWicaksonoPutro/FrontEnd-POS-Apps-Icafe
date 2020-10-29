@@ -7,15 +7,28 @@
             </div>
             <div class="body-card">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 title-report d-flex justify-content-start">Orders</div>
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 finance-report d-flex justify-content-start">3.270 </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 finance-report d-flex justify-content-start">{{order.toLocaleString('de-DE')}}</div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 period d-flex justify-content-start">+5% Last Week</div>
             </div>
         </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'DailyIncome'
+  name: 'DailyIncome',
+  data () {
+    return {
+      order: null
+    }
+  },
+  computed: {
+    ...mapGetters(['allHistory'])
+  },
+  mounted () {
+    const tabulasiData = this.allHistory
+    this.order = tabulasiData.length
+  }
 }
 </script>
 

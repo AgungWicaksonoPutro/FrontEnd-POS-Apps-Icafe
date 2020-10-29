@@ -30,15 +30,15 @@ export default {
         labels: [],
         datasets: [
           {
-            label: 'Month',
+            label: 'This Month',
             borderColor: '#f87979',
             backgroundColor: '#f87979',
             fill: false,
             data: []
           }, {
-            label: 'Data One',
-            borderColor: '#f87979',
-            backgroundColor: '#f87979',
+            label: 'Last Month',
+            borderColor: '#26deff',
+            backgroundColor: '#26deff',
             fill: false,
             data: []
           }
@@ -62,20 +62,24 @@ export default {
   },
   mounted () {
     const tabData = this.allHistory
-    tabData.forEach(d => {
-      const date = moment(d.createAt).format('ll')
-      console.log(date)
-      const {
-        amounts
-      } = d
-      console.log(amounts)
-      this.datacollection.labels.push(date)
-      this.datacollection.datasets[0].data.push(amounts)
+    const dataLabels = tabData.filter(a => {
+      return moment(a.createAt).format('MMMM') === moment(new Date()).format('MMMM')
+    }).map(a => {
+      return moment(a.createAt).format('lll')
     })
-    console.log(this.datacollection.labels)
-  },
-  methods: {
-
+    this.datacollection.labels = dataLabels
+    const dataSet = tabData.filter(a => {
+      return moment(a.createAt).format('MMMM') === moment(new Date()).format('MMMM')
+    }).map(a => {
+      return a.amounts.toString()
+    })
+    this.datacollection.datasets[0].data = dataSet
+    const dataSetYear = tabData.filter(a => {
+      return moment(a.createAt).format('MMMM') === moment('9').format('MMMM')
+    }).map(a => {
+      return a.amounts.toString()
+    })
+    this.datacollection.datasets[1].data = dataSetYear
   }
 }
 </script>

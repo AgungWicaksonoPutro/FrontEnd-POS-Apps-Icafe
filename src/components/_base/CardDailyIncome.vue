@@ -7,15 +7,34 @@
             </div>
             <div class="body-card">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 title-report d-flex justify-content-start">Today’s Income</div>
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 finance-report d-flex justify-content-start">Rp. 1.000.000 </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 finance-report d-flex justify-content-start">Rp. {{income.toLocaleString('de-DE')}} </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 period d-flex justify-content-start">+2% Yesterday</div>
             </div>
         </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
-  name: 'DailyIncome'
+  name: 'DailyIncome',
+  data () {
+    return {
+      income: null
+    }
+  },
+  computed: {
+    ...mapGetters(['allHistory'])
+  },
+  mounted () {
+    const tabulasiData = this.allHistory
+    const data = tabulasiData.filter(a => {
+      return moment(a.createAt).format('ll') === moment(new Date()).format('ll')
+    }).map(a => {
+      return a.amounts
+    }).reduce((a, b) => a + b)
+    this.income = data
+  }
 }
 </script>
 
