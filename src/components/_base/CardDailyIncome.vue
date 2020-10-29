@@ -34,6 +34,7 @@ export default {
       return a.amounts
     }).reduce((a, b) => a + b)
     this.income = data
+    console.log(data)
   }
 }
 </script>
